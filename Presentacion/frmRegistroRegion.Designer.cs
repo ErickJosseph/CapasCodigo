@@ -67,9 +67,9 @@
             label2.AutoSize = true;
             label2.Location = new Point(332, 85);
             label2.Name = "label2";
-            label2.Size = new Size(44, 15);
+            label2.Size = new Size(88, 15);
             label2.TabIndex = 4;
-            label2.Text = "Region";
+            label2.Text = "Nombre region";
             // 
             // txtTitulo
             // 
@@ -100,6 +100,7 @@
             btnCancelar.TabIndex = 5;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click_1;
             // 
             // btnEditar
             // 

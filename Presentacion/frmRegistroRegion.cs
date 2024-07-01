@@ -25,10 +25,11 @@ namespace Presentacion
             dgListaRegion.AutoGenerateColumns = false;
             dgListaRegion.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            ListarRegiones();
+            Limpiar();
 
             btnActualizar.Visible = false;
             btnCancelar.Visible = false;
+            btnEliminar.Visible = false;
             btnEditar.Visible = true;
             btnAgregar.Visible = true;
 
@@ -44,6 +45,9 @@ namespace Presentacion
                     string mensaje = string.Empty;
 
                     Negocio.RegistrarRegion(TextNombreRegion.Text, true);
+                    MessageBox.Show("Se agrego correctamente.");
+
+                    Limpiar();
                 }
                 else
                 {
@@ -97,6 +101,7 @@ namespace Presentacion
                     TextNombreRegion.Text = cNombre;
                     btnActualizar.Visible = true;
                     btnCancelar.Visible = true;
+                    btnEliminar.Visible = true;
                     btnEditar.Visible = false;
                     btnAgregar.Visible = false;
                 }
@@ -117,7 +122,7 @@ namespace Presentacion
                         Negocio.ActualizarRegion(nRegionId, TextNombreRegion.Text, true);
 
                         MessageBox.Show("Actualización completa.");
-                        ListarRegiones();
+                        Limpiar();
                     }
                     else
                     {
@@ -139,20 +144,10 @@ namespace Presentacion
         {
             btnActualizar.Visible = true;
             btnCancelar.Visible = true;
+            btnEliminar.Visible = true;
             btnEditar.Visible = false;
             btnAgregar.Visible = false;
             MessageBox.Show("Seleccione un registro");
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            btnActualizar.Visible = false;
-            btnCancelar.Visible = false;
-            btnEditar.Visible = true;
-            btnAgregar.Visible = true;
-            nRegionId = 0;
-            cNombre = "";
-            bEstado = true;
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -167,7 +162,8 @@ namespace Presentacion
                     Negocio.EliminarRegion(nRegionId);
 
                     MessageBox.Show("Se elimino la región correctamente.");
-                    ListarRegiones();
+                    
+                    Limpiar();
 
                 }
                 else
@@ -179,6 +175,25 @@ namespace Presentacion
             {
                 MessageBox.Show("" + ex);
             }
+        }
+
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            btnActualizar.Visible = false;
+            btnCancelar.Visible = false;
+            btnEliminar.Visible = false;
+            btnEditar.Visible = true;
+            btnAgregar.Visible = true;
+            Limpiar();
+            
+        }
+        public void Limpiar()
+        {
+            ListarRegiones();
+            TextNombreRegion.Text = "";
+            nRegionId = 0;
+            cNombre = "";
+            bEstado = true;
         }
     }
 }
